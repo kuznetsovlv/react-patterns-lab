@@ -4,15 +4,19 @@ import  {useCallback, useState, memo} from 'react';
 import type {Task} from "@/app/types";
 import {Stats, TaskCreator, TaskList} from "@/app/components";
 
-export default memo(function TaskApp() {
-    const [tasks, setTasks] = useState<Task[]>([]);
+interface TaskAppProps {
+    tasks: Task[];
+}
 
-    const handleAddTask = useCallback((task: Task) => setTasks(tasks => [...tasks, task]), []);
+export default memo<TaskAppProps>(function TaskApp({tasks: initialTasks}) {
+    const [tasks, setTasks] = useState<Task[]>(initialTasks);
+
+
 
     const handleChangeTask = useCallback(({id, ...rest}: Task) => setTasks(tasks => tasks.map((task) => task.id === id ? {id, ...rest} : task)), []);
 
     return <>
-        <TaskCreator onAdd={handleAddTask} />
+        <TaskCreator onCreate={setTasks} />
         <TaskList tasks={tasks} onChange={handleChangeTask} />
         <Stats tasks={tasks} />
     </>

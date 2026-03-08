@@ -5,12 +5,11 @@ import {getTasks} from "@/app/lib/tasks-store";
 
 export default async function Home() {
     const tasks = getTasks();
-    console.log([...tasks]);
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-          <TaskApp />
+          <TaskApp tasks={tasks} />
       </main>
     </div>
   );
