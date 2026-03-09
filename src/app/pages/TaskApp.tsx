@@ -11,11 +11,13 @@ interface TaskAppProps {
 export default memo<TaskAppProps>(function TaskApp({tasks: initialTasks}) {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
+    const handleAddTask = useCallback((task: Task) => setTasks(tasks => [...tasks, task]), []);
     const handleChangeTask = useCallback(({id, ...rest}: Task) => setTasks(tasks => tasks.map((task) => task.id === id ? {id, ...rest} : task)), []);
+    const handleDeleteTask = useCallback((id: string) => setTasks(tasks => tasks.filter((task) => task.id !== id)), [])
 
     return <>
-        <TaskCreator onCreate={setTasks} />
-        <TaskList tasks={tasks} onChange={handleChangeTask} />
+        <TaskCreator onCreate={handleAddTask} />
+        <TaskList tasks={tasks} onChange={handleChangeTask} onDelete={handleDeleteTask} />
         <Stats tasks={tasks} />
     </>
 });

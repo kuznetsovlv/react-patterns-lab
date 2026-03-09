@@ -5,19 +5,20 @@ import type {Task} from '@/app/types'
 import {createTask} from '@/app/utils'
 
 interface TaskCreatorProps {
-    onCreate(tasks: Task[]): void;
+    onCreate(task: Task): void;
 }
 
 const TaskCreator = memo<TaskCreatorProps>(function TaskCreator({onCreate})  {
     const [text, setText] = useState<string>('');
 
-    return <div className={styles.creator}>
-        <input className={styles.input} type="text" value={text} onChange={({target: {value}}) => setText(value) }/>
-        <input className={styles.button} type="button" value="Add" disabled={!text} onClick={() => {
-            const tasks = createTask(text);
-           tasks.then(onCreate, console.log).finally(() => setText(''));
-        }}/>
-    </div>
+    return <form className={styles.creator} onSubmit={(event) => {
+        event.preventDefault();
+        const tasks = createTask(text);
+        tasks.then(onCreate, console.log).finally(() => setText(''));
+    }}>
+        <input className={styles.input} type="text" name="text" value={text} onChange={({target: {value}}) => setText(value) }/>
+        <input className={styles.button} type="submit" value="Add" disabled={!text} />
+    </form>
 });
 
 export default TaskCreator

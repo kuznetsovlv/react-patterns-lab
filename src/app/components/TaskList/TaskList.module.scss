@@ -33,5 +33,24 @@ $inputSize: 20px;
       border-radius: 2px;
       cursor: pointer;
     }
+
+    input[type="button"] {
+      cursor: pointer;
+      flex: $inputSize 0 0;
+      width:$inputSize;
+      height: $inputSize;
+      border: 1px solid #aa2112;
+      border-radius: $inputSize/2;
+      color: #aa2112;
+      background: #ff6760;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 100%;
+    }
   }
 }

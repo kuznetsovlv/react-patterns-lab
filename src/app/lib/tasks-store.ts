@@ -1,22 +1,29 @@
-import {readFileSync, existsSync, writeFileSync} from 'node:fs'
+import {readFileSync, existsSync, writeFileSync, mkdirSync} from 'node:fs'
+import {join} from 'node:path';
 
 import type {Task} from '@/app/types';
 
-const filePath = './tasks.json';
+
+const dir = 'data';
+const file = 'tasks.json';
+const filePath = join(dir, file);
 
 export const getTasks = (): Task[] => readTasks();
 
-export const addTask = (text: string): Task[] => {
+export const addTask = (text: string): Task => {
     const tasks: Task[] = getTasks();
-    tasks.push({
+
+    const task = {
         id: crypto.randomUUID(),
         text,
         completed: false,
-    });
+    };
+
+    tasks.push(task);
 
     writeTasks(tasks);
 
-    return tasks;
+    return task;
 };
 
 export const toggleTask = (id: string): Task | null => {
@@ -56,5 +63,8 @@ function readTasks(): Task[] {
 }
 
 function writeTasks(tasks: Task[]): void {
+    if(!existsSync(dir)) {
+        mkdirSync(dir);
+    }
     writeFileSync(filePath, JSON.stringify(tasks), 'utf8');
 }
