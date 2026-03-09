@@ -4,11 +4,11 @@ import  {useCallback, useState, memo} from 'react';
 import type {Task} from "@/app/types";
 import {Stats, TaskCreator, TaskList} from "@/app/components";
 
-interface TaskAppProps {
+interface TaskAppClientProps {
     tasks: Task[];
 }
 
-export default memo<TaskAppProps>(function TaskApp({tasks: initialTasks}) {
+export default memo<TaskAppClientProps>(function TaskAppClient({tasks: initialTasks}) {
     const [tasks, setTasks] = useState<Task[]>(initialTasks);
 
     const handleAddTask = useCallback((task: Task) => setTasks(tasks => [...tasks, task]), []);

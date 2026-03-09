@@ -1,15 +1,17 @@
+import { Suspense } from 'react'
 import styles from './page.module.css';
 
 import {TaskApp} from './pages';
-import {getTasks} from "@/app/lib/tasks-store";
+import Skeleton from "./Skeleton";
 
-export default async function Home() {
-    const tasks = getTasks();
-
+export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-          <TaskApp tasks={tasks} />
+          <h1>Task Tracker</h1>
+          <Suspense fallback={<Skeleton />}>
+              <TaskApp />
+          </Suspense>
       </main>
     </div>
   );

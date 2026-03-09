@@ -1,6 +1,6 @@
 import { getTasks, addTask } from '@/app/lib/tasks-store';
 
-export const GET = async (): Promise<Response> =>  Response.json(getTasks());
+export const GET = async (): Promise<Response> =>  Response.json(await getTasks());
 
 export const POST = async (request: Request): Promise<Response> => {
     const body = await request.json();
@@ -13,7 +13,7 @@ export const POST = async (request: Request): Promise<Response> => {
         );
     }
 
-    const task = addTask(text);
+    const task = await addTask(text);
 
     return Response.json(task, { status: 201 });
 };

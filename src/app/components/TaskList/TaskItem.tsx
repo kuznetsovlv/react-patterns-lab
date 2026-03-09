@@ -12,7 +12,7 @@ interface TaskItemProps extends Task {
 const TaskItem = memo<TaskItemProps>(function TaskItem({id, text, completed, className, onChange, onDelete}) {
    return <li className={className}>
         <input id={id} name={id} type="checkbox" checked={completed}
-               onClick={() => toggleTask(id).then(onChange, console.log)}/>
+               onChange={() => toggleTask(id).then(onChange, console.log)}/>
         <label htmlFor={id}>{text}</label>
        <input type="button" value="-" onClick={() => deleteTask(id).then(() => onDelete(id), console.log)}/>
     </li>

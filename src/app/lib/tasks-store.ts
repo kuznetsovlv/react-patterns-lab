@@ -8,10 +8,13 @@ const dir = 'data';
 const file = 'tasks.json';
 const filePath = join(dir, file);
 
-export const getTasks = (): Task[] => readTasks();
+export const getTasks = async (): Promise<Task[]> => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    return readTasks();
+};
 
-export const addTask = (text: string): Task => {
-    const tasks: Task[] = getTasks();
+export const addTask = async (text: string): Promise<Task> => {
+    const tasks: Task[] = await getTasks();
 
     const task = {
         id: crypto.randomUUID(),
@@ -26,8 +29,8 @@ export const addTask = (text: string): Task => {
     return task;
 };
 
-export const toggleTask = (id: string): Task | null => {
-    const tasks: Task[] = getTasks();
+export const toggleTask = async (id: string): Promise<Task | null> => {
+    const tasks: Task[] = await getTasks();
     const task = tasks.find((task) => task.id === id);
 
     if(!task) {
@@ -41,8 +44,8 @@ export const toggleTask = (id: string): Task | null => {
     return task;
 };
 
-export const deleteTask = (id: string): boolean => {
-    const tasks: Task[] = getTasks();
+export const deleteTask = async (id: string): Promise<boolean> => {
+    const tasks: Task[] = await getTasks();
     const index = tasks.findIndex(task => task.id === id);
     if(index < 0) {
         return false;

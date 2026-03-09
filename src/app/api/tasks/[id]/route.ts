@@ -6,7 +6,7 @@ interface RouteContext {
 
 export const PATCH = async (_request: Request, {params}: RouteContext): Promise<Response> => {
     const { id } = await params;
-    const task = toggleTask(id);
+    const task = await toggleTask(id);
 
     if (!task) {
         return Response.json(
@@ -20,7 +20,7 @@ export const PATCH = async (_request: Request, {params}: RouteContext): Promise<
 
 export const DELETE = async (_request: Request, {params}: RouteContext): Promise<Response> => {
     const { id } = await params;
-    const deleted = deleteTask(id);
+    const deleted = await deleteTask(id);
 
     return deleted ? new Response(null, { status: 204 }) : Response.json(
         { error: 'Task not found' },

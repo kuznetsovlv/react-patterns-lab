@@ -8,7 +8,7 @@ interface TaskCreatorProps {
     onCreate(task: Task): void;
 }
 
-const TaskCreator = memo<TaskCreatorProps>(function TaskCreator({onCreate})  {
+export default memo<TaskCreatorProps>(function TaskCreator({onCreate})  {
     const [text, setText] = useState<string>('');
 
     return <form className={styles.creator} onSubmit={(event) => {
@@ -20,5 +20,3 @@ const TaskCreator = memo<TaskCreatorProps>(function TaskCreator({onCreate})  {
         <input className={styles.button} type="submit" value="Add" disabled={!text} />
     </form>
 });
-
-export default TaskCreator
