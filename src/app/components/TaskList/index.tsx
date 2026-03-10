@@ -1,8 +1,10 @@
 import React from 'react';
+import clsx from "clsx";
 import styles from './TaskList.module.scss'
 
 import type {Task} from '@/app/types'
 import TaskItem from './TaskItem';
+import {TEMPORARY_TASK_ID} from "@/app/constants";
 
 interface TaskListProps {
     tasks: Task[];
@@ -12,7 +14,11 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({tasks, onChange, onDelete}) => {
     return <ul className={styles.list}>
-        {tasks.map((task) => (<TaskItem key={task.id} className={styles.item} {...task} onChange={onChange} onDelete={onDelete} />))}
+        {tasks.map(({id, ...restTask}) => {
+            const disabled = id === TEMPORARY_TASK_ID;
+
+            return (<TaskItem key={id} id={id} className={clsx(styles.item, {[styles.tmp]: disabled})} disabled={disabled} {...restTask} onChange={onChange} onDelete={onDelete}/>)
+        })}
     </ul>
 }
 
