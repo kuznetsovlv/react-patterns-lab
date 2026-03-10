@@ -1,8 +1,7 @@
-import {readFileSync, existsSync, writeFileSync, mkdirSync} from 'node:fs'
+import {readFileSync, existsSync, writeFileSync, mkdirSync} from 'node:fs';
 import {join} from 'node:path';
 
 import type {Task} from '@/app/types';
-
 
 const dir = 'data';
 const file = 'tasks.json';
@@ -33,7 +32,7 @@ export const toggleTask = async (id: string): Promise<Task | null> => {
     const tasks: Task[] = await getTasks();
     const task = tasks.find((task) => task.id === id);
 
-    if(!task) {
+    if (!task) {
         return null;
     }
 
@@ -46,8 +45,8 @@ export const toggleTask = async (id: string): Promise<Task | null> => {
 
 export const deleteTask = async (id: string): Promise<boolean> => {
     const tasks: Task[] = await getTasks();
-    const index = tasks.findIndex(task => task.id === id);
-    if(index < 0) {
+    const index = tasks.findIndex((task) => task.id === id);
+    if (index < 0) {
         return false;
     }
 
@@ -57,7 +56,7 @@ export const deleteTask = async (id: string): Promise<boolean> => {
 };
 
 function readTasks(): Task[] {
-    if(existsSync(filePath)) {
+    if (existsSync(filePath)) {
         const data = readFileSync(filePath, 'utf8') || '[]';
         return JSON.parse(data) as Task[];
     }
@@ -66,7 +65,7 @@ function readTasks(): Task[] {
 }
 
 function writeTasks(tasks: Task[]): void {
-    if(!existsSync(dir)) {
+    if (!existsSync(dir)) {
         mkdirSync(dir);
     }
     writeFileSync(filePath, JSON.stringify(tasks), 'utf8');

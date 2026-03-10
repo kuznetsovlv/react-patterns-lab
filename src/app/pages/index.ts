@@ -1,3 +1,3 @@
-import  TaskApp from './TaskApp';
+import TaskApp from './TaskApp';
 
-export { TaskApp };
+export {TaskApp};

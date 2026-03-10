@@ -1,6 +1,6 @@
 import {memo} from 'react';
 
-import type {Task} from '@/app/types'
+import type {Task} from '@/app/types';
 import {toggleTask, deleteTask} from '@/app/utils';
 
 interface TaskItemProps extends Task {
@@ -10,16 +10,36 @@ interface TaskItemProps extends Task {
     onDelete(id: string): void;
 }
 
-const TaskItem = memo<TaskItemProps>(function TaskItem({id, text, completed, className, disabled = false, onChange, onDelete}) {
-
-   return <li className={className}>
-        <input id={id} name={id} type="checkbox" checked={completed} disabled={disabled}
-               onChange={() => toggleTask(id).then(onChange, console.log)}
-        />
-        <label htmlFor={id}>{text}</label>
-       <input type="button" value="-" disabled={disabled} onClick={() => deleteTask(id).then(() => onDelete(id), console.log)}/>
-    </li>
-})
-
+const TaskItem = memo<TaskItemProps>(function TaskItem({
+    id,
+    text,
+    completed,
+    className,
+    disabled = false,
+    onChange,
+    onDelete,
+}) {
+    return (
+        <li className={className}>
+            <input
+                id={id}
+                name={id}
+                type="checkbox"
+                checked={completed}
+                disabled={disabled}
+                onChange={() => toggleTask(id).then(onChange, console.error)}
+            />
+            <label htmlFor={id}>{text}</label>
+            <input
+                type="button"
+                value="-"
+                disabled={disabled}
+                onClick={() =>
+                    deleteTask(id).then(() => onDelete(id), console.error)
+                }
+            />
+        </li>
+    );
+});
 
 export default TaskItem;
