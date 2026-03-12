@@ -6,6 +6,7 @@ import styles from './page.module.css';
 
 import {TaskApp} from './pages';
 import Skeleton from './Skeleton';
+import HookPage from '@/app/hooks/page';
 
 export default function Home() {
     return (
@@ -14,6 +15,10 @@ export default function Home() {
                 <h1>Task Tracker</h1>
                 <Suspense fallback={<Skeleton />}>
                     <TaskApp />
+                </Suspense>
+                <h1>Hooks Demo</h1>
+                <Suspense fallback={<Skeleton />}>
+                    <HookPage />
                 </Suspense>
             </main>
         </div>
