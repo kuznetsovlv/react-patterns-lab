@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# React Patterns Lab
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
-First, run the development server:
+A learning project exploring modern React and Next.js patterns.
+
+The project started as a simple task tracker and gradually evolved
+into a playground for experimenting with rendering strategies,
+React hooks, and server interactions.
+
+## Tech Stack
+
+- React 19
+- Next.js (App Router)
+- TypeScript
+- SCSS modules
+- ESLint + Prettier
+
+## Topics explored
+
+### Rendering strategies
+
+- SSR – Server-Side Rendering
+- SSG – Static Site Generation
+- ISR – Incremental Static Regeneration
+- Streaming with Suspense
+
+### React patterns
+
+- useTransition
+- useDeferredValue
+- useImperativeHandle
+- optimistic UI
+- Server Actions
+
+### Tooling
+
+- ESLint configuration
+- Prettier integration
+- project structure experiments
+
+## Demo modules
+
+The project contains several small demos:
+
+- Task Tracker (server actions + optimistic UI)
+- React Hooks playground
+
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open: http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
+```
+src/app
+├─ components
+├─ hooks
+├─ pages
+└─ lib
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Experiments roadmap
 
-## Learn More
+- [x] SSR
+- [x] ISR
+- [x] Streaming
+- [x] Server Actions
+- [x] Optimistic UI
+- [x] useTransition
+- [x] useDeferredValue
+- [x] useImperativeHandle
+- [ ] useOptimistic
+- [ ] useActionState
+- [ ] use
+- [ ] Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This project is licensed under the MIT License.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the [LICENSE](./LICENSE) file for details.

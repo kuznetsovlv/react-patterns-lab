@@ -7,26 +7,26 @@ import ImperativeInput from './ImperativeInput';
 import styles from './ImperativeHandleDemo.module.scss';
 
 export default function ImperativeHandleDemo() {
-    const ref = useRef<ImperativeInputHandle>(null);
+    const inputRef = useRef<ImperativeInputHandle>(null);
 
     return (
         <>
-            <ImperativeInput ref={ref} />
+            <ImperativeInput ref={inputRef} />
             <div className={styles.buttons}>
                 <input
                     type="button"
                     value="Focus"
-                    onClick={() => ref.current?.focus()}
+                    onClick={() => inputRef.current?.focus()}
                 />
                 <input
                     type="button"
                     value="Select"
-                    onClick={() => ref.current?.select()}
+                    onClick={() => inputRef.current?.select()}
                 />
                 <input
                     type="button"
                     value="Clear"
-                    onClick={() => ref.current?.clear()}
+                    onClick={() => inputRef.current?.clear()}
                 />
             </div>
         </>

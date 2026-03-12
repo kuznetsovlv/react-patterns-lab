@@ -2,7 +2,7 @@ import {useImperativeHandle, forwardRef, useRef, useState} from 'react';
 
 import type {ImperativeInputHandle} from './typed';
 
-export default forwardRef<ImperativeInputHandle, {}>(
+export default forwardRef<ImperativeInputHandle, Record<string, never>>(
     function ImperativeInput(_, ref) {
         const inputRef = useRef<HTMLInputElement>(null);
         const [value, setValue] = useState<string>('');
