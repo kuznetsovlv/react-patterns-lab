@@ -12,8 +12,6 @@ export default memo(function ActionStateDemo() {
         FormData
     >(createTaskActionState, null);
 
-    console.log(state);
-
     return (
         <>
             <form
