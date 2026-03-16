@@ -77,7 +77,7 @@ src/app
 - [x] useDeferredValue
 - [x] useImperativeHandle
 - [x] useOptimistic
-- [ ] useActionState
+- [x] useActionState
 - [ ] use
 - [ ] Tailwind CSS
 
