@@ -2,7 +2,7 @@
 
 import {revalidatePath} from 'next/cache';
 import {addTask, toggleTask, deleteTask} from '@/app/lib/tasks-store';
-import type {Task} from '@/app/types';
+import {ActionState, Task} from '@/app/types';
 
 export async function createTaskAction(text: string): Promise<Task> {
     const normalizedText = text.trim();
@@ -36,4 +36,19 @@ export async function removeTaskAction(id: string): Promise<boolean> {
     revalidatePath('/');
 
     return success;
+}
+
+export async function createTaskActionState(
+    _: ActionState | null,
+    formData: FormData
+): Promise<ActionState> {
+    const text: string = ((formData.get('text') ?? '') as string).trim();
+
+    if (!text) {
+        return {error: 'Text is required', success: false};
+    }
+
+    await addTask(text);
+
+    return {success: true};
 }

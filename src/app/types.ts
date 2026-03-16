@@ -13,3 +13,8 @@ export enum TaskStatus {
 export interface TaskClient extends Task {
     status: TaskStatus;
 }
+
+export interface ActionState {
+    error?: string;
+    success: boolean;
+}
