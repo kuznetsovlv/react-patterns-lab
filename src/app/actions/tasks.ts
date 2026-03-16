@@ -50,5 +50,7 @@ export async function createTaskActionState(
 
     await addTask(text);
 
+    revalidatePath('/');
+
     return {success: true};
 }
