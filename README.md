@@ -78,8 +78,8 @@ src/app
 - [x] useImperativeHandle
 - [x] useOptimistic
 - [x] useActionState
-- [ ] use
-- [ ] Tailwind CSS
+- [x] use
+- [x] Tailwind CSS
 
 ## License
 

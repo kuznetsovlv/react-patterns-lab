@@ -1,11 +1,12 @@
-import React from 'react';
+import {use} from 'react';
 
 import TaskAppClient from './TaskAppClient';
 import {getTasks} from '@/app/lib/tasks-store';
 import {TaskStatus} from '@/app/types';
+import type {Task} from '@/app/types';
 
-export default async function TaskApp() {
-    const tasks = await getTasks();
+export default function TaskApp() {
+    const tasks = use<Task[]>(getTasks());
 
     return (
         <TaskAppClient
