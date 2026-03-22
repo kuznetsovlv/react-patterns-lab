@@ -1,7 +1,14 @@
-'use client';
-
-import {memo, useCallback, useOptimistic, useTransition} from 'react';
-import {TaskClient, TaskStatus} from '@/app/types';
+import {
+    memo,
+    useCallback,
+    useOptimistic,
+    useTransition,
+    use,
+    useMemo,
+} from 'react';
+import type {ReactElement} from 'react';
+import {TaskStatus} from '@/app/types';
+import type {Task, TaskClient} from '@/app/types';
 import Stats from '@/app/components/Stats';
 import TaskCreator from '@/app/components/TaskCreator';
 import TaskList from '@/app/components/TaskList';
@@ -12,8 +19,9 @@ import {
     switchTaskAction,
 } from '@/app/actions/tasks';
 
-interface TaskAppClientProps {
-    tasks: TaskClient[];
+interface TaskAppProps {
+    tasksPromise: Promise<Task[]>;
+    Input?: ReactElement;
 }
 
 enum TaskActionType {
@@ -27,13 +35,20 @@ interface Payload {
     text: string;
 }
 
-export default memo<TaskAppClientProps>(function TaskAppClient({
-    tasks: initialTasks,
-}) {
+export default memo<TaskAppProps>(function TaskApp({tasksPromise, Input}) {
+    const initialTasks = use(tasksPromise);
+    const tasks: TaskClient[] = useMemo(
+        () =>
+            initialTasks.map((task) => ({
+                ...task,
+                status: TaskStatus.READY,
+            })),
+        initialTasks
+    );
     const [_, startTransition] = useTransition();
 
     const [optimisticTasks, updateTasks] = useOptimistic<TaskClient[], Payload>(
-        initialTasks,
+        tasks,
         (tasks, {text, action}) => {
             switch (action) {
                 case TaskActionType.ADD:
@@ -112,7 +127,7 @@ export default memo<TaskAppClientProps>(function TaskAppClient({
 
     return (
         <>
-            <TaskCreator onCreate={handleAddTask} />
+            {Input ?? <TaskCreator onCreate={handleAddTask} />}
             <TaskList
                 tasks={optimisticTasks}
                 onChange={handleToggleTask}

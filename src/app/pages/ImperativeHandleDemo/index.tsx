@@ -1,8 +1,6 @@
-'use client';
-
 import {useRef} from 'react';
 
-import type {ImperativeInputHandle} from './typed';
+import type {ImperativeInputHandle} from './types';
 import ImperativeInput from './ImperativeInput';
 import styles from './ImperativeHandleDemo.module.scss';
 
