@@ -1,4 +1,4 @@
-import {useImperativeHandle, forwardRef, useRef, useState} from 'react';
+import {useImperativeHandle, useRef, useState} from 'react';
 import type {RefObject} from 'react';
 
 import type {ImperativeInputHandle} from './types';

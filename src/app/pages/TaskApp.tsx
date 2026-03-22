@@ -43,9 +43,9 @@ export default memo<TaskAppProps>(function TaskApp({tasksPromise, Input}) {
                 ...task,
                 status: TaskStatus.READY,
             })),
-        initialTasks
+        [initialTasks]
     );
-    const [_, startTransition] = useTransition();
+    const [, startTransition] = useTransition();
 
     const [optimisticTasks, updateTasks] = useOptimistic<TaskClient[], Payload>(
         tasks,
@@ -83,47 +83,56 @@ export default memo<TaskAppProps>(function TaskApp({tasksPromise, Input}) {
         }
     );
 
-    const handleAddTask = useCallback(async (text: string) => {
-        startTransition(async () => {
-            updateTasks({text, action: TaskActionType.ADD});
+    const handleAddTask = useCallback(
+        async (text: string) => {
+            startTransition(async () => {
+                updateTasks({text, action: TaskActionType.ADD});
 
-            try {
-                await createTaskAction(text);
-            } catch (error) {
-                console.error(error);
-            }
-        });
-    }, []);
-
-    const handleToggleTask = useCallback(async (id: string) => {
-        startTransition(async () => {
-            updateTasks({
-                text: id,
-                action: TaskActionType.TOGGLE,
+                try {
+                    await createTaskAction(text);
+                } catch (error) {
+                    console.error(error);
+                }
             });
+        },
+        [updateTasks]
+    );
 
-            try {
-                await switchTaskAction(id);
-            } catch (error) {
-                console.error(error);
-            }
-        });
-    }, []);
+    const handleToggleTask = useCallback(
+        async (id: string) => {
+            startTransition(async () => {
+                updateTasks({
+                    text: id,
+                    action: TaskActionType.TOGGLE,
+                });
 
-    const handleDeleteTask = useCallback(async (id: string) => {
-        startTransition(async () => {
-            updateTasks({
-                text: id,
-                action: TaskActionType.DELETE,
+                try {
+                    await switchTaskAction(id);
+                } catch (error) {
+                    console.error(error);
+                }
             });
+        },
+        [updateTasks]
+    );
 
-            try {
-                await removeTaskAction(id);
-            } catch (error) {
-                console.error(error);
-            }
-        });
-    }, []);
+    const handleDeleteTask = useCallback(
+        async (id: string) => {
+            startTransition(async () => {
+                updateTasks({
+                    text: id,
+                    action: TaskActionType.DELETE,
+                });
+
+                try {
+                    await removeTaskAction(id);
+                } catch (error) {
+                    console.error(error);
+                }
+            });
+        },
+        [updateTasks]
+    );
 
     return (
         <>

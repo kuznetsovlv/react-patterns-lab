@@ -1,5 +1,6 @@
 import {lazy, Suspense} from 'react';
-import {PageIds, PageProps} from './types';
+import {PageIds} from './types';
+import type {PageProps} from './types';
 import Skeleton from './Skeleton';
 
 const TaskApp = lazy(() => import('@/app/pages/TaskApp'));
@@ -10,6 +11,7 @@ const ImperativeHandleDemo = lazy(
     () => import('@/app/pages/ImperativeHandleDemo')
 );
 const ActionStateDemo = lazy(() => import('@/app/pages/ActionStateDemo'));
+const IP = lazy(() => import('@/app/pages/IP'));
 
 export default function Page({id, tasksPromise, numberPromise}: PageProps) {
     switch (id) {
@@ -54,6 +56,12 @@ export default function Page({id, tasksPromise, numberPromise}: PageProps) {
                             </Suspense>
                         }
                     />
+                </Suspense>
+            );
+        case PageIds.IP:
+            return (
+                <Suspense fallback={<Skeleton />}>
+                    <IP />
                 </Suspense>
             );
         default:

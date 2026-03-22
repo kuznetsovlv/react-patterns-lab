@@ -18,3 +18,7 @@ export interface ActionState {
     error?: string;
     success: boolean;
 }
+
+export interface ResponseIP {
+    ip: string | null;
+}

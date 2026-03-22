@@ -13,4 +13,5 @@ export const pageList: Page[] = [
         id: PageIds.USE_IMPERATIVE_HANDLE_HOOK,
         title: 'Demo useImperativeHandle hook',
     },
+    {id: PageIds.IP, title: 'IP Detector'},
 ];

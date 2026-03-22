@@ -2,6 +2,7 @@ import {defineConfig, globalIgnores} from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
 import nextTs from 'eslint-config-next/typescript';
 import stylistic from '@stylistic/eslint-plugin';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 const eslintConfig = defineConfig([
     ...nextVitals,
@@ -25,18 +26,7 @@ const eslintConfig = defineConfig([
                     children: 'never',
                 },
             ],
-            '@stylistic/max-len': [
-                'warn',
-                {
-                    code: 120,
-                    tabWidth: 2,
-                    ignoreUrls: true,
-                    ignoreStrings: false,
-                    ignoreTemplateLiterals: false,
-                    ignoreRegExpLiterals: true,
-                    ignoreComments: false,
-                },
-            ],
+
         },
     },
 
@@ -50,7 +40,6 @@ const eslintConfig = defineConfig([
                         {
                             group: ['@/app/components'],
                             message:
-                            // eslint-disable-next-line @stylistic/max-len
                                 'Do not import from the shared components barrel inside app routes/pages. Use direct imports instead.',
                         },
                     ],
@@ -64,7 +53,15 @@ const eslintConfig = defineConfig([
         rules: {
             'no-console': 'off',
         },
+
     },
+    {
+        files: ['*.config.{js,mjs,cjs,ts}', 'eslint.config.*', 'postcss.config.*'],
+        rules: {
+            'import/no-anonymous-default-export': 'off',
+        },
+    },
+    eslintConfigPrettier,
     // Override default ignores of eslint-config-next.
     globalIgnores([
         // Default ignores of eslint-config-next:
